@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 void telaInicial();
+void limpaTela();
 
 
 int main(){
@@ -9,35 +10,37 @@ int main(){
     int escolha;
     
     do{
+        limpaTela();
         telaInicial();
         scanf("%i",&escolha);
 
         switch (escolha)
         {
         case 1:
-            system("cls");
+            limpaTela();
             printf("Meus livros.\n");
             break;
 
         case 2:
-            system("cls");
+            limpaTela();
             printf("Inserir livro.\n");
             break;
 
         case 3:
-            system("cls");
+            limpaTela();
             printf("Remover um livro.\n");
             break;
 
         case 4:
-            system("cls");
+            limpaTela();
             printf("Informacoes gerais.\n");
             break;
 
         case 5:
             exit(1);
+            
         default:
-            system("cls");
+            limpaTela();
             printf("\t\tOPCAO INCORRETA\n\n");
         
         }
@@ -55,4 +58,12 @@ void telaInicial(){
     printf("4 - Informacoes gerais.\n");
     printf("5 - Sair.\n");
 
+}
+
+void limpaTela(){
+    #ifdef _WIN32
+    system("cls");
+    #else
+    system("clear");
+    #endif
 }
