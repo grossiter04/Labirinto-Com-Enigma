@@ -7,8 +7,8 @@
 </head>
 <body>
     <header>
-        <h1>Simulador de Biblioteca</h1>
-        <p>É uma atividade para a cadeira Algoritmos e Estruturas de Dados(AED), onde deve se fazer jogo/quiz.<br>E decimos fazer um Simulador de Biblioteca</p>
+        <h1>Labirinto Com Enigma</h1>
+        <p>É uma atividade para a cadeira Algoritmos e Estruturas de Dados(AED), onde deve se fazer jogo/quiz.<br>E decimos fazer um Labirinto Com enigma</p>
       <header>
         <h1>Desenvolvedores</h1>
         <table>
@@ -43,7 +43,7 @@
     </header>
     </header>
         <h2>Visão geral</h2>
-        <p>O projeto ira mostrar simples ações de uma biblioteca, como: Visualizar seus livors, Inserir e remover livros, e terá informações de forma geral sobre sua biblioteca.</p>
+        <p>O projeto será um labirinto com enigmas para passar pelas salas.</p>
         Como usar:
         
         gcc -o saida main.c
