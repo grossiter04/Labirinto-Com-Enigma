@@ -102,7 +102,7 @@ int main() {
         printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
         if (sala_atual->esquerda != NULL || sala_atual->direita != NULL || sala_atual->esquerda == NULL || sala_atual->direita == NULL) {
-            printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita: ");
+            printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
             scanf("%i", &escolha);
 
             sala_anterior = sala_atual;
