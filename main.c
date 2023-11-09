@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_SALAS 100
+
 //estrutura da sala
 typedef struct Sala {
     int numero_sala;
@@ -14,7 +16,7 @@ typedef struct Sala {
 void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
     *sala = (Sala*)malloc(sizeof(Sala));
     if (*sala == NULL) {
-        printf("Erro na alocação de memória\n");
+        printf("Erro na alocacao de memoria\n");
         exit(1);
     }
     (*sala)->numero_sala = numero_sala;
@@ -28,6 +30,20 @@ void conectarSalas(Sala* de, Sala* sala_esquerda, Sala* sala_direita) {
     de->esquerda = sala_esquerda;
     de->direita = sala_direita;
 }
+
+void telaInicial(){
+    printf("\t\tBEM VINDO\n");
+}
+
+void liberarArvore(Sala* sala) {
+    if (sala != NULL) {
+        liberarArvore(sala->esquerda);
+        liberarArvore(sala->direita);
+        free(sala);
+    }
+}
+
+struct Sala *pilha[MAX_SALAS];
 
 int main() {
     //aqui vai iniciar as salas
@@ -46,9 +62,11 @@ int main() {
     Sala* sala_12 = NULL;
     Sala* sala_13 = NULL;
     Sala* sala_15 = NULL;
+    Sala* sala_anterior = NULL;
+
 
     //aqui voce cria e coloca as caracteristicas da sala  (&nomeDaSala, numero da sala, Comentario da sala);
-    criarSala(&sala_8, 8, "Vcoce esta no comeco do labirinto. SALA 8");
+    criarSala(&sala_8, 8, "Voce esta no comeco do labirinto. SALA 8");
     criarSala(&sala_5, 5, "SALA 5");
     criarSala(&sala_2, 2, "SALA 2");
     criarSala(&sala_6, 6, "SALA 6");
@@ -75,20 +93,32 @@ int main() {
 
     Sala* sala_atual = sala_8; //usar isso aqui para saber a posição do enigma
 
+    telaInicial();
+
+    int topo = -1;
+
     int escolha;
     while (sala_atual != NULL) {
         printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
-        if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
+        if (sala_atual->esquerda != NULL || sala_atual->direita != NULL || sala_atual->esquerda == NULL || sala_atual->direita == NULL) {
             printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita: ");
             scanf("%i", &escolha);
 
-            if (escolha == 1) {
+            sala_anterior = sala_atual;
+
+            if(escolha == 0 && topo >= 0){
+                sala_atual = pilha[topo--];
+            } else if (escolha == 1) {
+                //sala_anterior = sala_atual;
+                pilha[++topo] = sala_anterior;
                 sala_atual = sala_atual->esquerda;
             } else if (escolha == 2) {
+                //sala_anterior = sala_atual;
+                pilha[++topo] = sala_anterior;
                 sala_atual = sala_atual->direita;
             } else {
-                printf("Escolha inválida. Tente novamente.\n");
+                printf("Escolha invalida. Tente novamente.\n");
             }
             #ifdef _WIN32
                 system("cls");
@@ -97,9 +127,12 @@ int main() {
             #endif
         } else {
             sala_atual = NULL;
-            printf("Você chegou ao fim do labirinto.\n");
+            printf("Voce chegou ao fim do labirinto.\n");
         }
     }
 
+    liberarArvore(sala_8);
+
     return 0;
 }
+
