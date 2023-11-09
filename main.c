@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Definimos a estrutura da sala
+//estrutura da sala
 typedef struct Sala {
     int numero_sala;
     char descricao[100];
@@ -10,7 +10,7 @@ typedef struct Sala {
     struct Sala* direita;
 } Sala;
 
-// Função para criar uma sala
+//criar uma sala
 void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
     *sala = (Sala*)malloc(sizeof(Sala));
     if (*sala == NULL) {
@@ -23,7 +23,7 @@ void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
     (*sala)->direita = NULL;
 }
 
-// Função para conectar salas
+//concectar as salas
 void conectarSalas(Sala* de, Sala* sala_esquerda, Sala* sala_direita) {
     de->esquerda = sala_esquerda;
     de->direita = sala_direita;
@@ -54,7 +54,7 @@ int main() {
     while (sala_atual != NULL) {
         printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
-        if (sala_atual->esquerda != NULL && sala_atual->direita != NULL) {
+        if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
             printf("Escolha 1 para ir para a sala à esquerda e 2 para a sala à direita: ");
             scanf("%i", &escolha);
 
