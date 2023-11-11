@@ -97,9 +97,18 @@ int main() {
 
     int topo = -1;
 
+    char listaResposta[15][15] = {"teste1", "teste2", "teste3", "teste4", "teste5", "teste6", "teste7", "teste8", "teste9", "teste10", "teste11", "teste12", "teste13", "teste14", "teste15"};
+
+    char palavra[15];
+
     int escolha;
     while (sala_atual != NULL) {
         printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
+
+        do{
+            printf("Resposta do enigma:\n");
+            scanf("%s",palavra);
+        }while(strcmp(palavra, listaResposta[sala_atual->numero_sala-1]) != 0);
 
         if (sala_atual->esquerda != NULL || sala_atual->direita != NULL || sala_atual->esquerda == NULL || sala_atual->direita == NULL) {
             printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
