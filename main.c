@@ -48,6 +48,14 @@ void liberarArvore(Sala* sala) {
     }
 }
 
+void limpaTela(){
+    #ifdef _WIN32
+    system("cls");
+    #else
+    system("clear");
+    #endif
+}
+
 struct Sala *pilha[MAX_SALAS];
 
 int main() {
@@ -78,14 +86,14 @@ int main() {
     criarSala(&sala_11, 11, "SALA 11");
     criarSala(&sala_14, 14, "SALA 14");
     criarSala(&sala_10, 10, "SALA 10");
-    criarSala(&sala_1, 1, "SALA 1");
-    criarSala(&sala_3, 3, "SALA 3");
-    criarSala(&sala_4, 4, "SALA 4");
-    criarSala(&sala_7, 7, "SALA 7");
-    criarSala(&sala_9, 9, "SALA 9");
-    criarSala(&sala_12, 12, "SALA 12");
-    criarSala(&sala_13, 13, "SALA 13");
-    criarSala(&sala_15, 15, "SALA 15");
+    criarSala(&sala_1, 1, "Voce esta na ultima sala do labirinto. SALA1");
+    criarSala(&sala_3, 3, "Voce esta na ultima sala do labirinto. SALA 3");
+    criarSala(&sala_4, 4, "Voce esta na ultima sala do labirinto. SALA 4");
+    criarSala(&sala_7, 7, "Voce esta na ultima sala do labirinto. SALA 7");
+    criarSala(&sala_9, 9, "Voce esta na ultima sala do labirinto. SALA 9");
+    criarSala(&sala_12, 12, "Voce esta na ultima sala do labirinto. SALA 12");
+    criarSala(&sala_13, 13, "Voce esta na ultima sala do labirinto. SALA 13");
+    criarSala(&sala_15, 15, "Voce esta na ultima sala do labirinto. SALA 15");
 
     //aqui ira conectar as salas
     conectarSalas(sala_8, sala_5, sala_11);
@@ -98,6 +106,8 @@ int main() {
 
     Sala* sala_atual = sala_8; //usar isso aqui para saber a posição do enigma
 
+    
+    limpaTela();
     telaInicial();
 
     int dificuldade;
@@ -109,7 +119,7 @@ int main() {
     int topo = -1;
 
     //em cima está as perguntas faceis e em baixo estão as respostas
-    char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. Quem sou eu?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresço. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
+    char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. Quem sou eu?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresco. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
     char listaRespostaFacil[15][20] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvao", "espelho", "esponja"};
 
     //em cima está as perguntas medias e em baixo estão as respontas
@@ -131,52 +141,66 @@ int main() {
             do{
                 printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
-                if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){
-                    #ifdef _WIN32
-                    system("cls");
-                    #else
-                    system("clear");
-                    #endif
+
+                if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){ 
+                    limpaTela(); //pra cada interação limpar a a tela
                     printf("Resposta Errada.\n");
                 }
+
             }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
+
         } else if (dificuldade == 2){ //se o jogo for na dificuldade media
             do{
                 printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
+
+                if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
+                    limpaTela(); //pra cada interação limpar a a tela
+                    printf("Resposta Errda.\n");
+                }
+
             }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
+
         } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
             do{
                 printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
+
+                if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
+                    limpaTela();//para cada interação limpar a tela
+                    printf("Resposta Errada.\n");
+                }
+
             }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
         }
 
+        limpaTela();
 
         if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
-            printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
-            scanf("%i", &escolha);
+            //scanf("%i", &escolha);
 
             sala_anterior = sala_atual;
 
-            if(escolha == 0 && topo >= 0){
-                sala_atual = pilha[topo--];
-            } else if (escolha == 1) {
-                //sala_anterior = sala_atual;
-                pilha[++topo] = sala_anterior;
-                sala_atual = sala_atual->esquerda;
-            } else if (escolha == 2) {
-                //sala_anterior = sala_atual;
-                pilha[++topo] = sala_anterior;
-                sala_atual = sala_atual->direita;
-            } else {
-                printf("Escolha invalida. Tente novamente.\n");
+            do{
+                printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
+                scanf("%i", &escolha);
+
+                if(escolha == 0 && topo >= 0){
+                    sala_atual = pilha[topo--];
+                } else if (escolha == 1) {
+                    //sala_anterior = sala_atual;
+                    pilha[++topo] = sala_anterior;
+                    sala_atual = sala_atual->esquerda;
+                } else if (escolha == 2) {
+                    //sala_anterior = sala_atual;
+                    pilha[++topo] = sala_anterior;
+                    sala_atual = sala_atual->direita;
+                } else {
+                    limpaTela();
+                    printf("Escolha invalida. Tente novamente.\n");
             }
-            #ifdef _WIN32
-                system("cls");
-            #else
-                system("clear");
-            #endif
+            }while(escolha<0 || escolha>2);
+
         } else {
             printf("Voce chegou a ultima sala do labirinto.\nPressione 0 para voltar a sala anterior.\n");
             scanf("%i",&escolha);
