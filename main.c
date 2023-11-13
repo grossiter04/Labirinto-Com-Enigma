@@ -106,15 +106,15 @@ int main() {
     int topo = -1;
 
     //em cima está as perguntas faceis e em baixo estão as respostas
-    char listaEnigmaFacil[15][100] = {"PerguntaFacil1", "PerguntaFacil2", "PerguntaFacil3", "PerguntaFacil4", "O que é aquela coisa que pode lá e pelo menos você vê?", "PerguntaFacil6", "PerguntaFacil7", "PerguntaFacil8", "PerguntaFacil9", "PerguntaFacil10", "PerguntaFacil11", "PerguntaFacil12", "PerguntaFacil13", "PerguntaFacil14", "PerguntaFacil15"};
-    char listaRespostaFacil[15][20] = {"RespostaFacil1", "RespostaFacil2", "RespostaFacil3", "RespostaFacil4", "escuridao", "RespostaFacil6", "RespostaFacil7", "RespostaFacil8", "RespostaFacil9", "RespostaFacil10", "RespostaFacil11", "RespostaFacil12", "RespostaFacil13", "RespostaFacil14", "RespostaFacil15"};
+    char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. Quem sou eu?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresço. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
+    char listaRespostaFacil[15][20] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvão", "espelho", "esponja"};
 
     //em cima está as perguntas medias e em baixo estão as respontas
-    char listaEnigmaMedio[15][100] = {"PerguntasMedio1", "PerguntasMedio2", "PerguntasMedio3", "PerguntasMedio4", "PerguntasMedio5", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "PerguntasMedio11", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
+    char listaEnigmaMedio[15][150] = {"PerguntasMedio1", "PerguntasMedio2", "PerguntasMedio3", "PerguntasMedio4", "PerguntasMedio5", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "PerguntasMedio11", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
     char listaRespostaMedio[15][20] = {"RespostaMedio1", "RespostaMedio2", "RespostaMedio3", "RespostaMedio4", "RespostaMedio5", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "RespostaMedio11", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
 
     //em cima está as perguntas dificeis e em baixo estão as respostas
-    char listaEnigmaDificil[15][100] = {"PerguntaDificil1", "PerguntaDificil2", "PerguntaDificil3", "PerguntaDificil4", "PerguntaDificil5", "PerguntaDificil6", "PerguntaDificil7", "PerguntaDificil8", "PerguntaDificil9", "PerguntaDificil10", "PerguntaDificil11", "PerguntaDificil12", "PerguntaDificil13", "PerguntaDificil14", "PerguntaDificil15"};
+    char listaEnigmaDificil[15][150] = {"PerguntaDificil1", "PerguntaDificil2", "PerguntaDificil3", "PerguntaDificil4", "PerguntaDificil5", "PerguntaDificil6", "PerguntaDificil7", "PerguntaDificil8", "PerguntaDificil9", "PerguntaDificil10", "PerguntaDificil11", "PerguntaDificil12", "PerguntaDificil13", "PerguntaDificil14", "PerguntaDificil15"};
     char listaRespostaDificil[15][20] = {"RespostaDificil1", "RespostaDificil2", "RespostaDificil3", "RespostaDificil4", "RespostaDificil5", "RespostaDificil6", "RespostaDificil7", "RespostaDificil8", "RespostaDificil9", "RespostaDificil10", "RespostaDificil11", "RespostaDificil12", "RespostaDificil13", "RespostaDificil14", "RespostaDificil15"};
 
 
@@ -128,15 +128,23 @@ int main() {
             do{
                 printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
+                if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){
+                    #ifdef _WIN32
+                    system("cls");
+                    #else
+                    system("clear");
+                    #endif
+                    printf("Resposta Errada.\n");
+                }
             }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
         } else if (dificuldade == 2){ //se o jogo for na dificuldade media
             do{
-                printf("Resposta do enigma medio:\n");
+                printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
             }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
         } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
             do{
-                printf("Resposta do enigma Dificil:\n");
+                printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
                 scanf("%s", palavra);
             }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
         }
