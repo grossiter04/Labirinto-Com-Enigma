@@ -37,6 +37,7 @@ void telaInicial(){
     printf("1 - Facil.\n");
     printf("2 - Medio.\n");
     printf("3 - Dificil.\n");
+    printf("4 - Sair.\n");
 }
 
 void liberarArvore(Sala* sala) {
@@ -103,11 +104,13 @@ int main() {
 
     scanf("%i",&dificuldade);
 
+    if(dificuldade == 4) exit(1);
+
     int topo = -1;
 
     //em cima está as perguntas faceis e em baixo estão as respostas
     char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. Quem sou eu?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresço. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
-    char listaRespostaFacil[15][20] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvão", "espelho", "esponja"};
+    char listaRespostaFacil[15][20] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvao", "espelho", "esponja"};
 
     //em cima está as perguntas medias e em baixo estão as respontas
     char listaEnigmaMedio[15][150] = {"PerguntasMedio1", "PerguntasMedio2", "PerguntasMedio3", "PerguntasMedio4", "PerguntasMedio5", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "PerguntasMedio11", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
@@ -150,7 +153,7 @@ int main() {
         }
 
 
-        if (sala_atual->esquerda != NULL || sala_atual->direita != NULL || sala_atual->esquerda == NULL || sala_atual->direita == NULL) {
+        if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
             printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
             scanf("%i", &escolha);
 
@@ -175,8 +178,11 @@ int main() {
                 system("clear");
             #endif
         } else {
-            sala_atual = NULL;
-            printf("Voce chegou ao fim do labirinto.\n");
+            printf("Voce chegou a ultima sala do labirinto.\nPressione 0 para voltar a sala anterior.\n");
+            scanf("%i",&escolha);
+            if(escolha == 0 && topo >= 0){
+                sala_atual = pilha[topo--];
+            }
         }
     }
 
