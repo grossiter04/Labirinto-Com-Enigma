@@ -122,12 +122,12 @@ int main() {
     int topo = -1;
 
     //em cima está as perguntas faceis e em baixo estão as respostas
-    char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. Quem sou eu?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresco. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
+    char listaEnigmaFacil[15][150] = {"Sem asas, eu voo; sem olhos, eu choro. O que sou?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresco. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
     char listaRespostaFacil[15][20] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvao", "espelho", "esponja"};
 
     //em cima está as perguntas medias e em baixo estão as respontas
-    char listaEnigmaMedio[15][150] = {"PerguntasMedio1", "PerguntasMedio2", "PerguntasMedio3", "PerguntasMedio4", "PerguntasMedio5", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "PerguntasMedio11", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
-    char listaRespostaMedio[15][20] = {"RespostaMedio1", "RespostaMedio2", "RespostaMedio3", "RespostaMedio4", "RespostaMedio5", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "RespostaMedio11", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
+    char listaEnigmaMedio[15][150] = {"O que um bom navegador faz quando o barco afunda?", "Como se chama a plantinha que nao enxerga nada?", "Qual a banda preferida dos mortos?", "Qual eh o animal que nao vale mais nada?", "Estou acima do rei. O que sou?", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "Eu faço a barba, diversas vezes por dia, e continuo barbudo. Quem sou eu?", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
+    char listaRespostaMedio[15][20] = {"nada", "acelga", "sepultura", "javali", "coroa", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "barbeiro", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
 
     //em cima está as perguntas dificeis e em baixo estão as respostas
     char listaEnigmaDificil[15][150] = {"PerguntaDificil1", "PerguntaDificil2", "PerguntaDificil3", "PerguntaDificil4", "PerguntaDificil5", "PerguntaDificil6", "PerguntaDificil7", "PerguntaDificil8", "PerguntaDificil9", "PerguntaDificil10", "PerguntaDificil11", "PerguntaDificil12", "PerguntaDificil13", "PerguntaDificil14", "PerguntaDificil15"};
@@ -191,20 +191,18 @@ int main() {
                 printf("Escolha 0 para ir pra sala anterior, escolha 1 para a sala a esquerda, escolha 2 para a sala a direita, escolha 3 para sair do jogo, e escolha 4 para tentar acertar a frase correta:\n");
                 scanf("%i", &escolha);
 
-                if(escolha == 0 && topo >= 0){
+                if(escolha == 0 && topo >= 0){ //caso queira voltar para a sala anterior
                     sala_atual = pilha[topo--];
-                } else if (escolha == 1) {
-                    //sala_anterior = sala_atual;
+                } else if (escolha == 1) { //caso queira ir para a esquerda
                     pilha[++topo] = sala_anterior;
                     sala_atual = sala_atual->esquerda;
-                } else if (escolha == 2) {
-                    //sala_anterior = sala_atual;
+                } else if (escolha == 2) { //caso queira ir para a direita
                     pilha[++topo] = sala_anterior;
                     sala_atual = sala_atual->direita;
-                }else if(escolha == 3){
+                }else if(escolha == 3){ //caso queira sair do jogo
                     liberarArvore(sala_8);
                     exit(1);
-                } else if (escolha == 4){
+                } else if (escolha == 4){ //caso queira acertar a frase
 
                     do
                     {
@@ -219,19 +217,19 @@ int main() {
 
                         if(strcmp(frase, FraseCerta) == 0){
                             printf("Voce ganhou o jogo!\n");
-                            escolha = 0;
+                            escolha = -1;
                         } else {
                             printf("Voce quer tentar adivinhar novamente: ");
                             printf("\nDigite 1 para continuar e 0 para sair.\n");
                             scanf("%i", &escolha);
                         }
-                    } while (escolha != 0);
+                    } while (escolha != -1);
                     
                 } else {
                     limpaTela();
                     printf("Escolha invalida. Tente novamente.\n");
-            }
-            }while(escolha<=0 || escolha>=3);
+                }
+            }while(escolha<0 || escolha>4);
 
         } else {
             printf("Voce chegou a ultima sala do labirinto.\nPressione 0 para voltar a sala anterior.\n");
