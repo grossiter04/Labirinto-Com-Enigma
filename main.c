@@ -32,7 +32,24 @@ void conectarSalas(Sala* de, Sala* sala_esquerda, Sala* sala_direita) {
 }
 
 void telaInicial(){
-    printf("\t\tBEM VINDO\n");
+    printf(" ___\n");
+    printf("                    .\"///\".\n");
+    printf("                   /|<> <>!\\\n");
+    printf("                  /-|  ^  !-\\\n");
+    printf("                 /-- \\_=_/ --\\\n");
+    printf("                 )---| W |---(\n");
+    printf("                /-\\--| W |--/-\\\n");
+    printf("               (_-_--|_-_|--___)\n");
+    printf("              (-___  -_-- _-- -_)\n");
+    printf("             )-_ _--_ _ ___--__|\n");
+    printf("            (___ --__  __ __--(\n");
+    printf("           /-_  / __ -_ -__  \\_\\\n");
+    printf("          _>/  -- /|___| _ \\ -_ )\n");
+    printf("         /--  _ - _/ _ \\>\\ -  -- \\\n");
+    printf("        ( / / /   > |~l \\   \\ \\ \\_)\n");
+    printf("     jjs| |-\' | |/  \"\"\"  \\| |   |_|\n");
+    printf("        L_|_|_|_/         L_L_|_l_)\n");
+    printf("\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n");
     printf("Escolha a dificuldade:\n");
     printf("1 - Facil.\n");
     printf("2 - Medio.\n");
@@ -130,11 +147,11 @@ int main() {
     char listaRespostaMedio[15][20] = {"nada", "acelga", "sepultura", "javali", "coroa", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "barbeiro", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
 
     //em cima está as perguntas dificeis e em baixo estão as respostas
-    char listaEnigmaDificil[15][150] = {"PerguntaDificil1", "PerguntaDificil2", "PerguntaDificil3", "PerguntaDificil4", "PerguntaDificil5", "PerguntaDificil6", "PerguntaDificil7", "PerguntaDificil8", "PerguntaDificil9", "PerguntaDificil10", "PerguntaDificil11", "PerguntaDificil12", "PerguntaDificil13", "PerguntaDificil14", "PerguntaDificil15"};
-    char listaRespostaDificil[15][20] = {"RespostaDificil1", "RespostaDificil2", "RespostaDificil3", "RespostaDificil4", "RespostaDificil5", "RespostaDificil6", "RespostaDificil7", "RespostaDificil8", "RespostaDificil9", "RespostaDificil10", "RespostaDificil11", "RespostaDificil12", "RespostaDificil13", "RespostaDificil14", "RespostaDificil15"};
+    char listaEnigmaDificil[15][150] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu ouço, mas nao tenho ouvidos. Não tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos. Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio. Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco. Não importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relâmpago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou escondê-la. Quase sempre sou bem-vindo e posso surgir sem avisar. Todo mundo tem, mas nem todos compartilham. Que eu sou?", "O que é sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que é sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em dança. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
+    char listaRespostaDificil[15][20] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizontes"};
 
     char frase[150];
-    char FraseCerta[] = "Coisas da vida";
+    char FraseCerta[] = "coisas da vida";
 
     char palavra[20];
 
