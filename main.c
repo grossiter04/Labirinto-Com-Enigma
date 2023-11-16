@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_SALAS 100
+#define MAX_SALAS 15
 
 //estrutura da sala
 typedef struct Sala {
@@ -114,7 +114,10 @@ int main() {
 
     scanf("%i",&dificuldade);
 
-    if(dificuldade == 4) exit(1);
+    if(dificuldade == 4) {
+        liberarArvore(sala_8);
+        exit(1);
+    }
 
     int topo = -1;
 
@@ -130,11 +133,14 @@ int main() {
     char listaEnigmaDificil[15][150] = {"PerguntaDificil1", "PerguntaDificil2", "PerguntaDificil3", "PerguntaDificil4", "PerguntaDificil5", "PerguntaDificil6", "PerguntaDificil7", "PerguntaDificil8", "PerguntaDificil9", "PerguntaDificil10", "PerguntaDificil11", "PerguntaDificil12", "PerguntaDificil13", "PerguntaDificil14", "PerguntaDificil15"};
     char listaRespostaDificil[15][20] = {"RespostaDificil1", "RespostaDificil2", "RespostaDificil3", "RespostaDificil4", "RespostaDificil5", "RespostaDificil6", "RespostaDificil7", "RespostaDificil8", "RespostaDificil9", "RespostaDificil10", "RespostaDificil11", "RespostaDificil12", "RespostaDificil13", "RespostaDificil14", "RespostaDificil15"};
 
+    char frase[150];
+    char FraseCerta[] = "Top Legal";
 
     char palavra[20];
 
     int escolha;
     while (sala_atual != NULL) {
+        limpaTela();
         printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
         if (dificuldade == 1){ //se o jogo for na dificuldade facil
@@ -177,12 +183,12 @@ int main() {
         limpaTela();
 
         if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
-            //scanf("%i", &escolha);
+
 
             sala_anterior = sala_atual;
 
             do{
-                printf("Escolha 1 para ir para a sala a esquerda e 2 para a sala a direita, e 0 para voltar para sala anterior: ");
+                printf("Escolha 0 para ir pra sala anterior, escolha 1 para a sala a esquerda, escolha 2 para a sala a direita, escolha 3 para sair do jogo, e escolha 4 para tentar acertar a frase correta:\n");
                 scanf("%i", &escolha);
 
                 if(escolha == 0 && topo >= 0){
@@ -195,11 +201,37 @@ int main() {
                     //sala_anterior = sala_atual;
                     pilha[++topo] = sala_anterior;
                     sala_atual = sala_atual->direita;
+                }else if(escolha == 3){
+                    liberarArvore(sala_8);
+                    exit(1);
+                } else if (escolha == 4){
+
+                    do
+                    {
+                        limpaTela();
+                        getchar();
+                        printf("Tente a certa a frase correta:\n");
+                        fgets(frase, sizeof(frase), stdin);
+
+                        if (frase[strlen(frase) - 1] == '\n') {
+                            frase[strlen(frase) - 1] = '\0';
+                        }
+
+                        if(strcmp(frase, FraseCerta) == 0){
+                            printf("Voce ganhou o jogo!\n");
+                            escolha = 0;
+                        } else {
+                            printf("Voce quer tentar adivinhar novamente: ");
+                            printf("\nDigite 1 para continuar e 0 para sair.\n");
+                            scanf("%i", &escolha);
+                        }
+                    } while (escolha != 0);
+                    
                 } else {
                     limpaTela();
                     printf("Escolha invalida. Tente novamente.\n");
             }
-            }while(escolha<0 || escolha>2);
+            }while(escolha<=0 || escolha>=3);
 
         } else {
             printf("Voce chegou a ultima sala do labirinto.\nPressione 0 para voltar a sala anterior.\n");
