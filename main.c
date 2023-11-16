@@ -134,7 +134,7 @@ int main() {
     char listaRespostaDificil[15][20] = {"RespostaDificil1", "RespostaDificil2", "RespostaDificil3", "RespostaDificil4", "RespostaDificil5", "RespostaDificil6", "RespostaDificil7", "RespostaDificil8", "RespostaDificil9", "RespostaDificil10", "RespostaDificil11", "RespostaDificil12", "RespostaDificil13", "RespostaDificil14", "RespostaDificil15"};
 
     char frase[150];
-    char FraseCerta[] = "Top Legal";
+    char FraseCerta[] = "Coisas da vida";
 
     char palavra[20];
 
