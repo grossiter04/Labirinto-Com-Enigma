@@ -8,17 +8,21 @@
 typedef struct Sala {
     int numero_sala;
     char descricao[100];
+    int enigma_resolvido;
     struct Sala* esquerda;
     struct Sala* direita;
 } Sala;
+
 typedef struct Jogador {
     char nome[50];
     int pontuacao;
 } Jogador;
+
 Jogador jogadores[25];
 int totalJogadores = 0; 
 char nomeDoJogador[50];
 int tentativas;
+
 //pontuação
 void calcularPontuacao() {
     int pontuacao = 1000 - (tentativas * 5); 
@@ -73,6 +77,7 @@ void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
     }
     (*sala)->numero_sala = numero_sala;
     strcpy((*sala)->descricao, descricao);
+    (*sala)->enigma_resolvido = 0;
     (*sala)->esquerda = NULL;
     (*sala)->direita = NULL;
 }
@@ -81,6 +86,14 @@ void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
 void conectarSalas(Sala* de, Sala* sala_esquerda, Sala* sala_direita) {
     de->esquerda = sala_esquerda;
     de->direita = sala_direita;
+}
+
+void resetEnigmas(Sala* sala) {
+    if (sala != NULL) {
+        sala->enigma_resolvido = 0;
+        resetEnigmas(sala->esquerda);
+        resetEnigmas(sala->direita);
+    }
 }
 
 void telaInicial(){
@@ -177,6 +190,8 @@ int main() {
 
     int jogarNovamente = 1;
     while(jogarNovamente == 1){
+
+
         Sala* sala_atual = sala_8; //usar isso aqui para saber a posição do enigma
 
     
@@ -202,9 +217,9 @@ int main() {
         char listaEnigmaMedio[15][300] = {"O que um bom navegador faz quando o barco afunda?", "Como se chama a plantinha que nao enxerga nada?", "Qual a banda preferida dos mortos?", "Qual eh o animal que nao vale mais nada?", "Estou acima do rei. O que sou?", "PerguntasMedio6", "PerguntasMedio7", "PerguntasMedio8", "PerguntasMedio9", "PerguntasMedio10", "Eu faço a barba, diversas vezes por dia, e continuo barbudo. Quem sou eu?", "PerguntasMedio12", "PerguntasMedio13", "PerguntasMedio14", "PerguntasMedio15"};
         char listaRespostaMedio[15][35] = {"nada", "acelga", "sepultura", "javali", "coroa", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "barbeiro", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
 
-    //em cima está as perguntas dificeis e em baixo estão as respostas
-    char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
-    char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
+        //em cima está as perguntas dificeis e em baixo estão as respostas
+        char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
+        char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
 
         char frase[150];
         char FraseCerta[] = "coisas da vida";
@@ -216,44 +231,57 @@ int main() {
             limpaTela();
             printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
-            if (dificuldade == 1){ //se o jogo for na dificuldade facil
-                do{
-                    printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
-                    scanf("%s", palavra);
 
-                    if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){ 
-                        limpaTela(); //pra cada interação limpar a a tela
-                        printf("Resposta Errada.\n");
+            
+            do{
+                if (!sala_atual->enigma_resolvido){
+                    if (dificuldade == 1){ //se o jogo for na dificuldade facil
+                        do{
+                            printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
+                            scanf("%s", palavra);
+
+                            if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){ 
+                                limpaTela(); //pra cada interação limpar a a tela
+                                printf("Resposta Errada.\n");
+                            }
+
+                        }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
+
+                    } else if (dificuldade == 2){ //se o jogo for na dificuldade media
+                        do{
+                            printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
+                            scanf("%s", palavra);
+
+                            if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
+                                limpaTela(); //pra cada interação limpar a a tela
+                                printf("Resposta Errda.\n");
+                            }
+
+                        }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
+
+                    } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
+                        do{
+                            printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
+                            scanf("%s", palavra);
+
+                            if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
+                                limpaTela();//para cada interação limpar a tela
+                                printf("Resposta Errada.\n");
+                            }
+
+                        }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
                     }
+                
+                sala_atual->enigma_resolvido = 1;
+                limpaTela();
 
-                }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
+                } else {
+                    printf("Voce ja resolver esse enigma desta sala. Escolha para onde ir.\n");
+                }
 
-            } else if (dificuldade == 2){ //se o jogo for na dificuldade media
-                do{
-                    printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
-                    scanf("%s", palavra);
+            }while(dificuldade<1 || dificuldade>3);
 
-                    if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
-                        limpaTela(); //pra cada interação limpar a a tela
-                        printf("Resposta Errda.\n");
-                    }
-
-                }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
-
-            } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
-                do{
-                    printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
-                    scanf("%s", palavra);
-
-                    if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
-                        limpaTela();//para cada interação limpar a tela
-                        printf("Resposta Errada.\n");
-                    }
-
-                }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
-            }
-
-            limpaTela();
+            //limpaTela();
 
             if (sala_atual->esquerda != NULL || sala_atual->direita != NULL) {
 
@@ -261,7 +289,7 @@ int main() {
                 sala_anterior = sala_atual;
 
                 do{
-                    printf("Escolha 0 para ir pra sala anterior, escolha 1 para a sala a esquerda, escolha 2 para a sala a direita, escolha 3 para sair do jogo, e escolha 4 para tentar acertar a frase correta:\n");
+                    printf("0 - para ir pra sala anterior.\n1 - para a sala a esquerda.\n2 - para a sala a direita.\n3 - para sair do jogo.\n4 - para tentar acertar a frase correta.\n");
                     scanf("%i", &escolha);
 
                     if(escolha == 0 && topo >= 0){ //caso queira voltar para a sala anterior
@@ -319,6 +347,7 @@ int main() {
             }
         }
 
+        resetEnigmas(sala_8);
     }
 
     printf("Saindo!!");
