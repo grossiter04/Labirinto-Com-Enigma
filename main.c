@@ -11,6 +11,58 @@ typedef struct Sala {
     struct Sala* esquerda;
     struct Sala* direita;
 } Sala;
+typedef struct Jogador {
+    char nome[50];
+    int pontuacao;
+} Jogador;
+Jogador jogadores[25];
+int totalJogadores = 0; 
+char nomeDoJogador[50];
+int tentativas;
+//pontuação
+void calcularPontuacao() {
+    int pontuacao = 1000 - (tentativas * 5); 
+
+    if (pontuacao < 0) {
+        pontuacao = 0; 
+    }
+    strcpy(jogadores[totalJogadores].nome, nomeDoJogador); // Substitua "nomeDoJogador" pelo nome real do jogador
+    jogadores[totalJogadores].pontuacao = pontuacao;
+    totalJogadores++;
+}
+void insertionSort() {
+    int i, j;
+    Jogador chave;
+
+    for (i = 1; i < totalJogadores; i++) {
+        chave = jogadores[i];
+        j = i - 1;
+
+        while (j >= 0 && jogadores[j].pontuacao < chave.pontuacao) {
+            jogadores[j + 1] = jogadores[j];
+            j = j - 1;
+        }
+
+        jogadores[j + 1] = chave;
+    }
+}
+void salvarPontuacoes() {
+    FILE *arquivo;
+    arquivo = fopen("pontuacoes.txt", "w");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return;
+    }
+
+    fprintf(arquivo, "Top 25 Jogadores:\n");
+
+    for (int i = 0; i < totalJogadores && i < 25; i++) {
+        fprintf(arquivo, "%d. %s - %d pontos\n", i + 1, jogadores[i].nome, jogadores[i].pontuacao);
+    }
+
+    fclose(arquivo);
+}
 
 //criar uma sala
 void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
@@ -50,6 +102,8 @@ void telaInicial(){
     printf("     jjs| |-\' | |/  \"\"\"  \\| |   |_|\n");
     printf("        L_|_|_|_/         L_L_|_l_)\n");
     printf("\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n");
+    printf("Digite seu nome: ");
+    scanf("%s", nomeDoJogador);
     printf("Escolha a dificuldade:\n");
     printf("1 - Facil.\n");
     printf("2 - Medio.\n");
@@ -147,8 +201,8 @@ int main() {
     char listaRespostaMedio[15][20] = {"nada", "acelga", "sepultura", "javali", "coroa", "RespostaMedio6", "RespostaMedio7", "RespostaMedio8", "RespostaMedio9", "RespostaMedio10", "barbeiro", "RespostaMedio12", "RespostaMedio13", "RespostaMedio14", "RespostaMedio15"};
 
     //em cima está as perguntas dificeis e em baixo estão as respostas
-    char listaEnigmaDificil[15][150] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu ouço, mas nao tenho ouvidos. Não tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos. Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio. Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco. Não importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relâmpago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou escondê-la. Quase sempre sou bem-vindo e posso surgir sem avisar. Todo mundo tem, mas nem todos compartilham. Que eu sou?", "O que é sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que é sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em dança. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
-    char listaRespostaDificil[15][20] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizontes"};
+    char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
+    char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
 
     char frase[150];
     char FraseCerta[] = "coisas da vida";
