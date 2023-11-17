@@ -88,7 +88,7 @@ void conectarSalas(Sala* de, Sala* sala_esquerda, Sala* sala_direita) {
     de->direita = sala_direita;
 }
 
-void resetEnigmas(Sala* sala) {
+void resetEnigmas(Sala* sala) { //para resetar os enigmas que já foram passados
     if (sala != NULL) {
         sala->enigma_resolvido = 0;
         resetEnigmas(sala->esquerda);
@@ -106,14 +106,14 @@ void telaInicial(){
     printf("                /-\\--| W |--/-\\\n");
     printf("               (_-_--|_-_|--___)\n");
     printf("              (-___  -_-- _-- -_)\n");
-    printf("             )-_ _--_ _ ___--__|\n");
-    printf("            (___ --__  __ __--(\n");
-    printf("           /-_  / __ -_ -__  \\_\\\n");
-    printf("          _>/  -- /|___| _ \\ -_ )\n");
-    printf("         /--  _ - _/ _ \\>\\ -  -- \\\n");
-    printf("        ( / / /   > |~l \\   \\ \\ \\_)\n");
-    printf("     jjs| |-\' | |/  \"\"\"  \\| |   |_|\n");
-    printf("        L_|_|_|_/         L_L_|_l_)\n");
+    printf("             )-_ _--_ _ ___--__-_(\n");
+    printf("            (___ --__  __ __--_ -_)\n");
+    printf("           /-_  / __ -_ -__  --___ \\\n");
+    printf("          _>/  -- /|___| _ \\ -_ ) _<_\n");
+    printf("         /--  _ - _/ _ \\>\\ -  --__ - \\\n");
+    printf("        ( / / /   > |~l \\   \\ \\ \\-_-_-)\n");
+    printf("        | |-\' | |/  \"\"\"  \\| | __  |-_-|\n");
+    printf("        L_|__|__|_/         |__|__|_|_)\n");
     printf("\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n");
     printf("Digite seu nome: ");
     scanf("%s", nomeDoJogador);
@@ -190,7 +190,7 @@ int main() {
 
     int jogarNovamente = 1;
     while(jogarNovamente == 1){
-
+        limpaTela();
 
         Sala* sala_atual = sala_8; //usar isso aqui para saber a posição do enigma
 
@@ -200,7 +200,10 @@ int main() {
 
         int dificuldade;
 
-        scanf("%i",&dificuldade);
+
+        do{
+            scanf("%i",&dificuldade);
+        }while(dificuldade<1 || dificuldade>4);
 
         if(dificuldade == 4) {
             liberarArvore(sala_8);
@@ -232,54 +235,51 @@ int main() {
             printf("Sala %i: %s\n", sala_atual->numero_sala, sala_atual->descricao);
 
 
-            
-            do{
-                if (!sala_atual->enigma_resolvido){
-                    if (dificuldade == 1){ //se o jogo for na dificuldade facil
-                        do{
-                            printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
-                            scanf("%s", palavra);
+            if (!sala_atual->enigma_resolvido){
+                if (dificuldade == 1){ //se o jogo for na dificuldade facil
+                    do{
+                        printf("%s\n",listaEnigmaFacil[sala_atual->numero_sala-1]);
+                        scanf("%s", palavra);
 
-                            if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){ 
-                                limpaTela(); //pra cada interação limpar a a tela
-                                printf("Resposta Errada.\n");
-                            }
+                        if(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0){ 
+                            limpaTela(); //pra cada interação limpar a a tela
+                            printf("Resposta Errada.\n");
+                        }
 
-                        }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
+                    }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
 
-                    } else if (dificuldade == 2){ //se o jogo for na dificuldade media
-                        do{
-                            printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
-                            scanf("%s", palavra);
+                } else if (dificuldade == 2){ //se o jogo for na dificuldade media
+                    do{
+                        printf("%s\n",listaEnigmaMedio[sala_atual->numero_sala-1]);
+                        scanf("%s", palavra);
 
-                            if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
-                                limpaTela(); //pra cada interação limpar a a tela
-                                printf("Resposta Errda.\n");
-                            }
+                        if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
+                            limpaTela(); //pra cada interação limpar a a tela
+                            printf("Resposta Errda.\n");
+                        }
 
-                        }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
+                    }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
 
-                    } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
-                        do{
-                            printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
-                            scanf("%s", palavra);
+                } else if (dificuldade == 3){//se o jogo for na dificuldade dificil
+                    do{
+                        printf("%s\n",listaEnigmaDificil[sala_atual->numero_sala-1]);
+                        scanf("%s", palavra);
 
-                            if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
-                                limpaTela();//para cada interação limpar a tela
-                                printf("Resposta Errada.\n");
-                            }
+                        if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
+                            limpaTela();//para cada interação limpar a tela
+                            printf("Resposta Errada.\n");
+                        }
 
-                        }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
-                    }
-                
-                sala_atual->enigma_resolvido = 1;
-                limpaTela();
-
-                } else {
-                    printf("Voce ja resolver esse enigma desta sala. Escolha para onde ir.\n");
+                    }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
                 }
+            
+            sala_atual->enigma_resolvido = 1;
+            limpaTela();
 
-            }while(dificuldade<1 || dificuldade>3);
+            } else {
+                printf("Voce ja resolver esse enigma desta sala. Escolha para onde ir.\n");
+            }
+
 
             //limpaTela();
 
