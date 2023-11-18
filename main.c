@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MAX_SALAS 15
-
+int pontos=0;
 //estrutura da sala
 typedef struct Sala {
     int numero_sala;
@@ -213,15 +213,15 @@ int main() {
         int topo = -1;
 
         //em cima está as perguntas faceis e em baixo estão as respostas
-        char listaEnigmaFacil[15][300] = {"Sem asas, eu voo; sem olhos, eu choro. O que sou?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaço, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu não choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresco. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
+        char listaEnigmaFacil[15][300] = {"Sem asas, eu voo; sem olhos, eu choro. O que sou?", "Sou leve como uma pluma, mas nem o homem mais forte pode me segurar por muito tempo. O que sou?", "Sou tirado da terra, mas nunca saio do chao. O que sou?", "Tenho chaves, mas nao abro portas. Tenho espaco, mas nao tenho quartos. O que sou?", "Se voce olhar para o meu rosto, nao encontrara treze em nenhum lugar. O que eu sou?", "Tenho rabo, mas nao sou cao Nao tenho asas, mas sei voar Se me largarem, nao subo, Mas saio ao vento a brincar. Quem sou eu?", "Pode ser atirado do alto de um predio e ficar super bem. Mas quando eh colocado na agua morre pouco tempo depois. O que sou?", "Fica cada vez mais molhado quanto mais a gente seca. O que sou?", "Voce tira a minha pele. Eu nao choro. Voce, sim. O que sou?", "Anda sobre quatro membros de manha, dois a tarde e tres a noite. O que sou?", "Quanto mais voce tira, mais eu cresco. O que sou?", "Nao eh vivo, mas cresce. Nao tem pulmoes, mas precisa de ar. Nao tem boca, mas a agua pode mata-lo. O que sou?", "Sou preto quando voce compra, vermelho quando voce usa e cinza quando voce joga fora. O que sou?", "Faco duas pessoas a partir de uma so. O que sou?", "Sou cheio de furinhos, mas ainda assim consigo segurar agua. O que sou?"};
         char listaRespostaFacil[15][35] = {"nuvem", "ar", "foto", "teclado", "relogio", "pipa", "papel", "toalha", "cebola", "humano", "buraco", "fogo", "carvao", "espelho", "esponja"};
 
         //em cima está as perguntas medias e em baixo estão as respontas
-        char listaEnigmaMedio[15][450] = {"O que um bom navegador faz quando o barco afunda?", "Como se chama a plantinha que nao enxerga nada?", "Qual a banda preferida dos mortos?", "Qual eh o animal que nao vale mais nada?", "Estou acima do rei. O que sou?", "O que e que e mais rapido do que qualquer pessoa, mas nao pode correr por muito tempo?", "O que e que e pequeno como um rato, mas pode levantar um elefante?", "O que e que e sempre quebrado antes de usarmos?", " O que e que e liquido quando o compra, solido quando o usa e se joga fora quando esta terminado?", "Sou forte, mas posso ser quebrado", "Eu faco a barba, diversas vezes por dia, e continuo barbudo. Quem sou eu?", "Eu sou algo que você pode sentir, mas nao pode ver.", "O que tem um corpo, mas nao tem pernas?", "Dois homens estao no deserto. Ambos estao com uma mochila nas costas. A mochila de um esta aberta e vazia.\n A mochila do outro esta fechada e guarda alguma coisa. Um dos homens esta morto.\n O que ha dentro da mochila fechada?", "Na cidade e uma profissão, na estrada e um perigo e na mata e um inseto."};
+        char listaEnigmaMedio[15][450] = {"O que um bom navegador faz quando o barco afunda?", "Como se chama a plantinha que nao enxerga nada?", "Qual a banda preferida dos mortos?", "Qual eh o animal que nao vale mais nada?", "Estou acima do rei. O que sou?", "O que e que e mais rapido do que qualquer pessoa, mas nao pode correr por muito tempo?", "O que e que e pequeno como um rato, mas pode levantar um elefante?", "O que e que e sempre quebrado antes de usarmos?", " O que e que e liquido quando o compra, solido quando o usa e se joga fora quando esta terminado?", "Sou forte, mas posso ser quebrado", "Eu faco a barba, diversas vezes por dia, e continuo barbudo. Quem sou eu?", "Eu sou algo que você pode sentir, mas nao pode ver.", "O que tem um corpo, mas nao tem pernas?", "Dois homens estao no deserto. Ambos estao com uma mochila nas costas. A mochila de um esta aberta e vazia.\n A mochila do outro esta fechada e guarda alguma coisa. Um dos homens esta morto.\n O que ha dentro da mochila fechada?", "Na cidade e uma profissao, na estrada e um perigo e na mata e um inseto."};
         char listaRespostaMedio[15][35] = {"nada", "acelga", "sepultura", "javali", "coroa", "pensamento", "balanca", "ovo", "sabonete", "promessa", "barbeiro", "temperatura", "cobra", "paraquedas", "barbeiro"};
 
         //em cima está as perguntas dificeis e em baixo estão as respostas
-        char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja não precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
+        char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja nao precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
         char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
 
         char frase[150];
@@ -245,6 +245,9 @@ int main() {
                             limpaTela(); //pra cada interação limpar a a tela
                             printf("Resposta Errada.\n");
                         }
+                        else{
+                            pontos+=1;
+                        }
 
                     }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
 
@@ -255,7 +258,10 @@ int main() {
 
                         if(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0){ 
                             limpaTela(); //pra cada interação limpar a a tela
-                            printf("Resposta Errda.\n");
+                            printf("Resposta Errada.\n");
+                        }
+                        else{
+                            pontos+=2;
                         }
 
                     }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
@@ -268,6 +274,9 @@ int main() {
                         if(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0){
                             limpaTela();//para cada interação limpar a tela
                             printf("Resposta Errada.\n");
+                        }
+                        else{
+                            pontos+=3;
                         }
 
                     }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
@@ -318,14 +327,20 @@ int main() {
                             }
 
                             if(strcmp(frase, FraseCerta) == 0){
+                                pontos+=10;
                                 printf("Voce ganhou o jogo!\n");
+                                printf("A quantidade de pontos que voce conseguiu foi: %d\n",pontos);
                                 escolha = 0;
                                 //quando ganhar o jogo tem que ir para a tela inicial
                                 printf("Voce quer jogar o jogo novamente?\n");
                                 printf("1 - sim / 2 - nao\n");
                                 scanf("%i", &jogarNovamente);
+                                if(jogarNovamente==1){
+                                    pontos=0;
+                                }
                                 sala_atual = NULL;
                             } else {
+                                pontos=pontos-3;
                                 printf("Voce quer tentar adivinhar novamente: ");
                                 printf("\nDigite 1 para continuar e 0 para sair.\n");
                                 scanf("%i", &escolha);
