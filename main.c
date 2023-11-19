@@ -3,6 +3,30 @@
 #include <string.h>
 
 #define MAX_SALAS 15
+#define RESET      "\033[0m"
+#define BOLD       "\033[1m"
+#define UNDERLINE  "\033[4m"
+#define ITALIC     "\033[3m"
+#define STRIKETHROUGH "\033[9m"
+#define INVERT     "\033[7m"
+#define HIDDEN     "\033[8m"
+
+// Cores do texto
+#define RED        "\033[31m"
+#define GREEN      "\033[32m"
+#define YELLOW     "\033[33m"
+#define BLUE       "\033[34m"
+#define MAGENTA    "\033[35m"
+#define CYAN       "\033[36m"
+#define WHITE      "\033[97m" 
+
+// Cores de fundo
+#define BG_RED        "\033[41;37m"
+#define BG_GREEN      "\033[42;37m"
+#define BG_YELLOW     "\033[43;37m"
+#define BG_BLUE       "\033[44;37m"
+#define BG_MAGENTA    "\033[45;37m"
+#define BG_CYAN       "\033[46;37m"
 int pontos=0;
 //estrutura da sala
 typedef struct Sala {
@@ -122,25 +146,25 @@ void resetEnigmas(Sala* sala) { //para resetar os enigmas que já foram passados
 }
 
 void telaInicial(){
-    printf(" ___\n");
-    printf("                    .\"///\".\n");
-    printf("                   /|<> <>!\\\n");
-    printf("                  /-|  ^  !-\\\n");
-    printf("                 /-- \\_=_/ --\\\n");
-    printf("                 )---| W |---(\n");
-    printf("                /-\\--| W |--/-\\\n");
-    printf("               (_-_--|_-_|--___)\n");
-    printf("              (-___  -_-- _-- -_)\n");
-    printf("             )-_ _--_ _ ___--__-_(\n");
-    printf("            (___ --__  __ __--_ -_)\n");
-    printf("           /-_  / __ -_ -__  --___ \\\n");
-    printf("          _>/  -- /|___| _ \\ -_ ) _<_\n");
-    printf("         /--  _ - _/ _ \\>\\ -  --__ - \\\n");
-    printf("        ( / / /   > |~l \\   \\ \\ \\-_-_-)\n");
-    printf("        | |-\' | |/  \"\"\"  \\| | __  |-_-|\n");
-    printf("        L_|__|__|_/         |__|__|_|_)\n");
-    printf("\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n");
-    printf("Digite seu nome: ");
+    printf(MAGENTA" ___\n");
+    printf(MAGENTA"                    .\"///\".\n");
+    printf(MAGENTA"                   /|<> <>!\\\n");
+    printf(MAGENTA"                  /-|  ^  !-\\\n");
+    printf(MAGENTA"                 /-- \\_=_/ --\\\n");
+    printf(MAGENTA"                 )---| W |---(\n");
+    printf(MAGENTA"                /-\\--| W |--/-\\\n");
+    printf(MAGENTA"               (_-_--|_-_|--___)\n");
+    printf(MAGENTA"              (-___  -_-- _-- -_)\n");
+    printf(MAGENTA"             )-_ _--_ _ ___--__-_(\n");
+    printf(MAGENTA"            (___ --__  __ __--_ -_)\n");
+    printf(MAGENTA"           /-_  / __ -_ -__  --___ \\\n");
+    printf(MAGENTA"          _>/  -- /|___| _ \\ -_ ) _<_\n");
+    printf(MAGENTA"         /--  _ - _/ _ \\>\\ -  --__ - \\\n");
+    printf(MAGENTA"        ( / / /   > |~l \\   \\ \\ \\-_-_-)\n");
+    printf(MAGENTA"        | |-\' | |/  \"\"\"  \\| | __  |-_-|\n");
+    printf(MAGENTA"        L_|__|__|_/         |__|__|_|_)\n"RESET);
+    printf(YELLOW"\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n"RESET);
+    printf(ITALIC UNDERLINE BOLD WHITE"Digite seu nome: "RESET);
     scanf("%s", nomeDoJogador);
     printf("Escolha a dificuldade:\n");
     printf("1 - Facil.\n");
@@ -359,7 +383,7 @@ int main() {
 
                             if(strcmp(frase, FraseCerta) == 0){
                                 pontos+=10;
-                                printf("Voce ganhou o jogo!\n");
+                                printf(HIDDEN BG_RED "        " BG_YELLOW "        " BG_GREEN "        " BG_BLUE "     " RESET BG_BLUE BOLD "Voce ganhou o jogo!" HIDDEN "      " BG_GREEN "        " BG_YELLOW "        " BG_RED "        " RESET "\n\n");
                                 printf("A quantidade de pontos que voce conseguiu foi: %d\n",pontos);
                                 escolha = 0;
                                 salvarPontuacao(nomeDoJogador,pontos);
