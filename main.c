@@ -72,7 +72,26 @@ void salvarPontuacao(char *nomeDoJogador, int pontos) {
     // Fecha o arquivo
     fclose(arquivo);
 }
+void imprimirpontuacao(){
+    char nomeArquivo[] = "pontuacao.txt";
+    FILE *arquivo = fopen(nomeArquivo, "r");
+     // Verificar se o arquivo foi aberto com sucesso
+    if (arquivo == NULL) {
+        fprintf(stderr, "Erro ao abrir o arquivo %s\n", nomeArquivo);
+        return; // Código de erro
+    }
 
+    // Variável para armazenar cada linha do arquivo
+    char linha[100];
+
+    // Ler e imprimir cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        printf("%s", linha);
+    }
+
+    // Fechar o arquivo após a leitura
+    fclose(arquivo);
+}
 
 //criar uma sala
 void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
@@ -128,6 +147,7 @@ void telaInicial(){
     printf("2 - Medio.\n");
     printf("3 - Dificil.\n");
     printf("4 - Sair.\n");
+    //printf("5 - Ver pontuacao.\n");
 }
 
 void liberarArvore(Sala* sala) {
@@ -215,7 +235,12 @@ int main() {
             liberarArvore(sala_8);
             exit(1);
         }
-
+        /*if(dificuldade == 5) {
+            imprimirpontuacao();
+            printf("Voce quer jogar o jogo novamente?\n");
+            printf("1 - sim / 2 - nao\n");
+            scanf("%i", &jogarNovamente);
+        }*/
         int topo = -1;
 
         //em cima está as perguntas faceis e em baixo estão as respostas
@@ -338,6 +363,7 @@ int main() {
                                 printf("A quantidade de pontos que voce conseguiu foi: %d\n",pontos);
                                 escolha = 0;
                                 salvarPontuacao(nomeDoJogador,pontos);
+                                imprimirpontuacao();
                                 //quando ganhar o jogo tem que ir para a tela inicial
                                 printf("Voce quer jogar o jogo novamente?\n");
                                 printf("1 - sim / 2 - nao\n");
