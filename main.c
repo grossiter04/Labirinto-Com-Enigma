@@ -18,55 +18,61 @@ typedef struct Jogador {
     int pontuacao;
 } Jogador;
 
-Jogador jogadores[25];
-int totalJogadores = 0; 
 char nomeDoJogador[50];
 int tentativas;
 
-//pontuação
-void calcularPontuacao() {
-    int pontuacao = 1000 - (tentativas * 5); 
+void salvarPontuacao(char *nomeDoJogador, int pontos) {
+    Jogador novato;
+    novato.pontuacao = pontos;
+    strcpy(novato.nome, nomeDoJogador);
 
-    if (pontuacao < 0) {
-        pontuacao = 0; 
-    }
-    strcpy(jogadores[totalJogadores].nome, nomeDoJogador); // Substitua "nomeDoJogador" pelo nome real do jogador
-    jogadores[totalJogadores].pontuacao = pontuacao;
-    totalJogadores++;
-}
-void insertionSort() {
-    int i, j;
-    Jogador chave;
-
-    for (i = 1; i < totalJogadores; i++) {
-        chave = jogadores[i];
-        j = i - 1;
-
-        while (j >= 0 && jogadores[j].pontuacao < chave.pontuacao) {
-            jogadores[j + 1] = jogadores[j];
-            j = j - 1;
-        }
-
-        jogadores[j + 1] = chave;
-    }
-}
-void salvarPontuacoes() {
     FILE *arquivo;
-    arquivo = fopen("pontuacoes.txt", "w");
+
+    arquivo = fopen("pontuacao.txt", "a+");
 
     if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo para escrita.\n");
+        printf("Erro ao abrir o arquivo.\n");
         return;
     }
 
-    fprintf(arquivo, "Top 25 Jogadores:\n");
+    Jogador jogadores[100];
+    int numJogadores = 0;
 
-    for (int i = 0; i < totalJogadores && i < 25; i++) {
-        fprintf(arquivo, "%d. %s - %d pontos\n", i + 1, jogadores[i].nome, jogadores[i].pontuacao);
+    while (fscanf(arquivo, "%s %d", jogadores[numJogadores].nome, &jogadores[numJogadores].pontuacao) == 2) {
+        numJogadores++;
     }
 
+    // Verifica se o jogador já existe
+    for (int i = 0; i < numJogadores; i++) {
+        if (strcmp(jogadores[i].nome, novato.nome) == 0) {
+            // O jogador já existe
+            fclose(arquivo);
+            return;
+        }
+    }
+
+    int i = numJogadores - 1;
+    while (i >= 0 && jogadores[i].pontuacao < novato.pontuacao) {
+        jogadores[i + 1] = jogadores[i];
+        i--;
+    }
+    jogadores[i + 1] = novato;
+
+    // Fecha o arquivo antes de reabrir em modo de escrita
+    fclose(arquivo);
+
+    // Reabre o arquivo em modo de escrita (truncando o arquivo para zero tamanho)
+    arquivo = fopen("pontuacao.txt", "w");
+
+    // Escreve os dados ordenados no arquivo
+    for (int j = 0; j <= numJogadores; j++) {
+        fprintf(arquivo, "%s %d\n", jogadores[j].nome, jogadores[j].pontuacao);
+    }
+
+    // Fecha o arquivo
     fclose(arquivo);
 }
+
 
 //criar uma sala
 void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
@@ -331,6 +337,7 @@ int main() {
                                 printf("Voce ganhou o jogo!\n");
                                 printf("A quantidade de pontos que voce conseguiu foi: %d\n",pontos);
                                 escolha = 0;
+                                salvarPontuacao(nomeDoJogador,pontos);
                                 //quando ganhar o jogo tem que ir para a tela inicial
                                 printf("Voce quer jogar o jogo novamente?\n");
                                 printf("1 - sim / 2 - nao\n");
@@ -338,12 +345,17 @@ int main() {
                                 if(jogarNovamente==1){
                                     pontos=0;
                                 }
+
                                 sala_atual = NULL;
                             } else {
                                 pontos=pontos-3;
+                                if(pontos<0){
+                                    pontos=0;
+                                }
                                 printf("Voce quer tentar adivinhar novamente: ");
                                 printf("\nDigite 1 para continuar e 0 para sair.\n");
                                 scanf("%i", &escolha);
+
                             }
                         } while (escolha != 0);
                         
