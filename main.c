@@ -19,7 +19,8 @@
 #define MAGENTA    "\033[35m"
 #define CYAN       "\033[36m"
 #define WHITE      "\033[97m" 
-
+#define BROWN      "\x1b[38;2;165;42;42m"
+#define EGYPT      "\x1b[38;5;178m"
 // Cores de fundo
 #define BG_RED        "\033[41;37m"
 #define BG_GREEN      "\033[42;37m"
@@ -146,23 +147,23 @@ void resetEnigmas(Sala* sala) { //para resetar os enigmas que já foram passados
 }
 
 void telaInicial(){
-    printf(MAGENTA" ___\n");
-    printf(MAGENTA"                    .\"///\".\n");
-    printf(MAGENTA"                   /|<> <>!\\\n");
-    printf(MAGENTA"                  /-|  ^  !-\\\n");
-    printf(MAGENTA"                 /-- \\_=_/ --\\\n");
-    printf(MAGENTA"                 )---| W |---(\n");
-    printf(MAGENTA"                /-\\--| W |--/-\\\n");
-    printf(MAGENTA"               (_-_--|_-_|--___)\n");
-    printf(MAGENTA"              (-___  -_-- _-- -_)\n");
-    printf(MAGENTA"             )-_ _--_ _ ___--__-_(\n");
-    printf(MAGENTA"            (___ --__  __ __--_ -_)\n");
-    printf(MAGENTA"           /-_  / __ -_ -__  --___ \\\n");
-    printf(MAGENTA"          _>/  -- /|___| _ \\ -_ ) _<_\n");
-    printf(MAGENTA"         /--  _ - _/ _ \\>\\ -  --__ - \\\n");
-    printf(MAGENTA"        ( / / /   > |~l \\   \\ \\ \\-_-_-)\n");
-    printf(MAGENTA"        | |-\' | |/  \"\"\"  \\| | __  |-_-|\n");
-    printf(MAGENTA"        L_|__|__|_/         |__|__|_|_)\n"RESET);
+    printf(EGYPT" ___\n");
+    printf(EGYPT"                    .\"///\".\n");
+    printf(EGYPT"                   /|<> <>!\\\n");
+    printf(EGYPT"                  /-|  ^  !-\\\n");
+    printf(EGYPT"                 /-- \\_=_/ --\\\n");
+    printf(EGYPT"                 )---| W |---(\n");
+    printf(EGYPT"                /-\\--| W |--/-\\\n");
+    printf(EGYPT"               (_-_--|_-_|--___)\n");
+    printf(EGYPT"              (-___  -_-- _-- -_)\n");
+    printf(EGYPT"             )-_ _--_ _ ___--__-_(\n");
+    printf(EGYPT"            (___ --__  __ __--_ -_)\n");
+    printf(EGYPT"           /-_  / __ -_ -__  --___ \\\n");
+    printf(EGYPT"          _>/  -- /|___| _ \\ -_ ) _<_\n");
+    printf(EGYPT"         /--  _ - _/ _ \\>\\ -  --__ - \\\n");
+    printf(EGYPT"        ( / / /   > |~l \\   \\ \\ \\-_-_-)\n");
+    printf(EGYPT"        | |-\' | |/  \"\"\"  \\| | __  |-_-|\n");
+    printf(EGYPT"        L_|__|__|_/         |__|__|_|_)\n"RESET);
     printf(YELLOW"\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n"RESET);
     printf(ITALIC UNDERLINE BOLD WHITE"Digite seu nome: "RESET);
     scanf("%s", nomeDoJogador);
@@ -276,8 +277,8 @@ int main() {
         char listaRespostaMedio[15][35] = {"nada", "acelga", "sepultura", "javali", "coroa", "pensamento", "balanca", "ovo", "sabonete", "promessa", "barbeiro", "temperatura", "cobra", "paraquedas", "barbeiro"};
 
         //em cima está as perguntas dificeis e em baixo estão as respostas
-        char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja nao precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas. E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Quem me faz nao diz que faz. Quem me tem nao sabe que tem. E quem sabe nao me quer ter de jeito nenhum. Quem sou eu?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
-        char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "dinheiro falso", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
+        char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja nao precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas.\n E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Tenho cidades, mas não tenho casas. Tenho montanhas, mas não tenho árvores. O que sou?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
+        char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "mapa", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
 
         char frase[150];
         char FraseCerta[] = "coisas da vida";
