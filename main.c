@@ -33,6 +33,7 @@ int pontos=0;
 typedef struct Sala {
     int numero_sala;
     char descricao[100];
+    char palavra[20];
     int enigma_resolvido;
     struct Sala* esquerda;
     struct Sala* direita;
@@ -119,7 +120,7 @@ void imprimirpontuacao(){
 }
 
 //criar uma sala
-void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
+void criarSala(Sala** sala, int numero_sala, const char descricao[], const char palavra[]) {
     *sala = (Sala*)malloc(sizeof(Sala));
     if (*sala == NULL) {
         printf("Erro na alocacao de memoria\n");
@@ -127,6 +128,7 @@ void criarSala(Sala** sala, int numero_sala, const char descricao[]) {
     }
     (*sala)->numero_sala = numero_sala;
     strcpy((*sala)->descricao, descricao);
+    strcpy((*sala)->palavra, palavra);
     (*sala)->enigma_resolvido = 0;
     (*sala)->esquerda = NULL;
     (*sala)->direita = NULL;
@@ -171,8 +173,18 @@ void telaInicial(){
     printf("1 - Facil.\n");
     printf("2 - Medio.\n");
     printf("3 - Dificil.\n");
-    printf("4 - Sair.\n");
-    //printf("5 - Ver pontuacao.\n");
+    printf("4 - Ver pontuacao.\n");
+    printf("5 - Como jogar.\n");
+    printf("6 - Sair\n");
+}
+
+void telaComoJogar(){
+    printf(EGYPT"Esse jogos consiste em um labirinto, onde os jogadores devem passar pelas salas e resolver enigmas, apos a resolucao dos enigmas o jogador recebera uma\npalavra que no final forma uma frase (O JOGO TEM 15 SALAS e 15 ENIGMAS), entao voce deve encontrar 15 palavras.\n");
+    printf(EGYPT"Este jogo possui 3 niveis de dificuldade: facil, medio e dificil. E ele deve ser jogador individualmente.\n");
+    printf(EGYPT"Apos a resolucao de uma enigma duas portas se abrem para voce seguir o seu caminho, a direita ou a esquerda, voce tambem pode voltar para a sala anterior, entao voce decide o caminho que quer seguir, mas.\n\nCUIDADO PARA NAO SE PERDER!!!\n\n");
+    printf(EGYPT"Dica:\nPara ajudar com as palavras eh bom estar com papel e caneta na mão, pois VOCE VAI PRECISAR\n");
+    printf("APROVEITE O JOGO!!\n");
+    printf(YELLOW"\n\t\tBEM VINDO AO ENIGMA DA ESFINGE!\n\n");
 }
 
 void liberarArvore(Sala* sala) {
@@ -214,21 +226,21 @@ int main() {
 
 
     //aqui voce cria e coloca as caracteristicas da sala  (&nomeDaSala, numero da sala, Comentario da sala);
-    criarSala(&sala_8, 8, "Voce esta no comeco do labirinto. SALA 8");
-    criarSala(&sala_5, 5, "SALA 5");
-    criarSala(&sala_2, 2, "SALA 2");
-    criarSala(&sala_6, 6, "SALA 6");
-    criarSala(&sala_11, 11, "SALA 11");
-    criarSala(&sala_14, 14, "SALA 14");
-    criarSala(&sala_10, 10, "SALA 10");
-    criarSala(&sala_1, 1, "Voce esta na ultima sala do labirinto. SALA1");
-    criarSala(&sala_3, 3, "Voce esta na ultima sala do labirinto. SALA 3");
-    criarSala(&sala_4, 4, "Voce esta na ultima sala do labirinto. SALA 4");
-    criarSala(&sala_7, 7, "Voce esta na ultima sala do labirinto. SALA 7");
-    criarSala(&sala_9, 9, "Voce esta na ultima sala do labirinto. SALA 9");
-    criarSala(&sala_12, 12, "Voce esta na ultima sala do labirinto. SALA 12");
-    criarSala(&sala_13, 13, "Voce esta na ultima sala do labirinto. SALA 13");
-    criarSala(&sala_15, 15, "Voce esta na ultima sala do labirinto. SALA 15");
+    criarSala(&sala_8, 8, "Voce esta no comeco do labirinto. SALA 8", "levem");
+    criarSala(&sala_5, 5, "SALA 5", "feliz");
+    criarSala(&sala_2, 2, "SALA 2", "todos");
+    criarSala(&sala_6, 6, "SALA 6", "verdade");
+    criarSala(&sala_11, 11, "SALA 11", "faz");
+    criarSala(&sala_14, 14, "SALA 14", "que");
+    criarSala(&sala_10, 10, "SALA 10", "os");
+    criarSala(&sala_1, 1, "Voce esta na ultima sala do labirinto. SALA1", "passos");
+    criarSala(&sala_3, 3, "Voce esta na ultima sala do labirinto. SALA 3", "nos");
+    criarSala(&sala_4, 4, "Voce esta na ultima sala do labirinto. SALA 4", "para");
+    criarSala(&sala_7, 7, "Voce esta na ultima sala do labirinto. SALA 7", "o");
+    criarSala(&sala_9, 9, "Voce esta na ultima sala do labirinto. SALA 9", "nossos");
+    criarSala(&sala_12, 12, "Voce esta na ultima sala do labirinto. SALA 12", "nos");
+    criarSala(&sala_13, 13, "Voce esta na ultima sala do labirinto. SALA 13", "de");
+    criarSala(&sala_15, 15, "Voce esta na ultima sala do labirinto. SALA 15", "que");
 
     //aqui ira conectar as salas
     conectarSalas(sala_8, sala_5, sala_11);
@@ -246,26 +258,40 @@ int main() {
         Sala* sala_atual = sala_8; //usar isso aqui para saber a posição do enigma
 
     
-        limpaTela();
-        telaInicial();
 
-        int dificuldade;
+        int dificuldade = 0;
 
 
         do{
+            limpaTela();
+            telaInicial();
             scanf("%i",&dificuldade);
-        }while(dificuldade<1 || dificuldade>4);
+            if (dificuldade == 5){
+                limpaTela();
+                telaComoJogar();
+                printf(EGYPT"Pressione ENTER para voltar...");
+                scanf("%*c");
+                getchar();
+                dificuldade = 0;
+                limpaTela();
+            }
+            if (dificuldade == 6){
+                liberarArvore(sala_8);
+                exit(1);
+            } else if (dificuldade == 4){
+                imprimirpontuacao();
+                printf("Voce quer jogar o jogo novamente?\n");
+                printf("1 - sim / 2 - nao\n");
+                scanf("%i", &dificuldade);
+                if (dificuldade == 2){
+                    exit(1);
+                } else {
+                    dificuldade = 0;
+                }
+            }
+        }while(dificuldade<1 || dificuldade>6);
 
-        if(dificuldade == 4) {
-            liberarArvore(sala_8);
-            exit(1);
-        }
-        /*if(dificuldade == 5) {
-            imprimirpontuacao();
-            printf("Voce quer jogar o jogo novamente?\n");
-            printf("1 - sim / 2 - nao\n");
-            scanf("%i", &jogarNovamente);
-        }*/
+
         int topo = -1;
 
         //em cima está as perguntas faceis e em baixo estão as respostas
@@ -278,10 +304,11 @@ int main() {
 
         //em cima está as perguntas dificeis e em baixo estão as respostas
         char listaEnigmaDificil[15][450] = {"O que e algo que as pessoas tem, mas que nunca compartilham?", "Eu falo, mas nao tenho boca. Eu escuto, mas nao tenho ouvidos. Nao tenho corpo, mas vivo com o vento. Quem sou eu?", "Eu sou algo que as pessoas amam ou odeiam. Eu mudo tanto a aparencia das pessoas quanto seus pensamentos.\n Se uma pessoa cuida de si mesma, eu subo ainda mais. Eu engano algumas pessoas. E para outras, sou um verdadeiro misterio.\n Algumas pessoas bem que tentam me esconder, mas uma hora, inevitavelmente, eu apareco.\n Nao importa o que as pessoas tentem, eu jamais cairei. Quem sou eu?", "Quando precisa de mim, voce me atira para longe, ate um lugar onde ninguem pode me ver. Mas quando ja nao precisa mais, você me traz de volta. Quem sou eu?", "Ponha os dedos nos meus olhos que eu abrirei as minhas potentes mandibulas.\n E vou devorar tudo o que vier pela frente: roupas, penas, papeis. Quem sou eu?", "Tenho cidades, mas não tenho casas. Tenho montanhas, mas não tenho árvores. O que sou?", "Voce mede a minha vida em horas e eu te sirvo indo embora. Sou rapida quanto estou magra e devagar quando estou gorda. O vento e o meu maior inimigo. Quem sou eu?", "A mae de Mary teve quatro filhos. Abril, Maio e Junho foram os tres primeiros. Qual o nome da quarta crianca?", "O que pode correr, mas nunca anda; tem leito, mas nunca dorme; nasce, mas nao morre?", "Meu trovao vem antes do relampago, meu raio vem antes das nuvens e minha chuva seca toda terra em que toca. Quem eu sou?", "Posso ser aberto ou fechado, grande ou pequeno. Posso revelar a verdade ou esconde-la. \nQuase sempre sou bem-vindo e posso surgir sem avisar. \nTodo mundo tem, mas nem todos compartilham. Que eu sou?", "O que e sempre velho e algumas vezes novo; nunca chora e sempre murmura; nunca corre, mas anda devagar?", "O que e sempre verde e nunca cresce?", "Sou liquido, mas posso queimar. Em um recipiente, me contenho, mas em liberdade, me transformo em danca. O que sou?", "Sou a ponte entre a terra e o ceu, mas nunca me movo. O que sou?"};
-        char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "mapa", "vela", "Mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
+        char listaRespostaDificil[15][35] = {"segredo", "eco", "idade", "ancora", "tesoura", "mapa", "vela", "mary", "rio", "vulcao", "sorriso", "livro", "cor", "gas", "horizonte"};
 
         char frase[150];
-        char FraseCerta[] = "coisas da vida";
+        char FraseCerta[] = "que todos os nossos passos nos levem para o que nos faz feliz de verdade";  
+
 
         char palavra[20];
 
@@ -303,6 +330,12 @@ int main() {
                         }
                         else{
                             pontos+=1;
+                            limpaTela();
+                            printf("Palavra da sala:\n");
+                            printf("%s\n",sala_atual->palavra);
+                            printf("Digite ENTER para continuar...");
+                            scanf("%*c");
+                            getchar();
                         }
 
                     }while(strcmp(palavra, listaRespostaFacil[sala_atual->numero_sala-1]) != 0);
@@ -318,6 +351,12 @@ int main() {
                         }
                         else{
                             pontos+=2;
+                            limpaTela();
+                            printf("Palavra da sala:\n");
+                            printf("%s\n",sala_atual->palavra);
+                            printf("Digite ENTER para continuar...");
+                            scanf("%*c");
+                            getchar();
                         }
 
                     }while(strcmp(palavra, listaRespostaMedio[sala_atual->numero_sala-1]) != 0);
@@ -333,6 +372,12 @@ int main() {
                         }
                         else{
                             pontos+=3;
+                            limpaTela();
+                            printf("Palavra da sala:\n");
+                            printf("%s\n",sala_atual->palavra);
+                            printf("Digite ENTER para continuar...");
+                            scanf("%*c");
+                            getchar();
                         }
 
                     }while(strcmp(palavra, listaRespostaDificil[sala_atual->numero_sala-1]) != 0);
@@ -387,6 +432,7 @@ int main() {
                                 printf(HIDDEN BG_RED "        " BG_YELLOW "        " BG_GREEN "        " BG_BLUE "     " RESET BG_BLUE BOLD "Voce ganhou o jogo!" HIDDEN "      " BG_GREEN "        " BG_YELLOW "        " BG_RED "        " RESET "\n\n");
                                 printf("A quantidade de pontos que voce conseguiu foi: %d\n",pontos);
                                 escolha = 0;
+                                printf("\tTOP JOGADORES:\n");
                                 salvarPontuacao(nomeDoJogador,pontos);
                                 imprimirpontuacao();
                                 //quando ganhar o jogo tem que ir para a tela inicial
