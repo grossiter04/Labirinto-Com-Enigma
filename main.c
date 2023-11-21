@@ -84,38 +84,30 @@ void salvarPontuacao(char *nomeDoJogador, int pontos) {
     }
     jogadores[i + 1] = novato;
 
-    // Fecha o arquivo antes de reabrir em modo de escrita
     fclose(arquivo);
 
-    // Reabre o arquivo em modo de escrita (truncando o arquivo para zero tamanho)
     arquivo = fopen("pontuacao.txt", "w");
 
-    // Escreve os dados ordenados no arquivo
     for (int j = 0; j <= numJogadores; j++) {
         fprintf(arquivo, "%s %d\n", jogadores[j].nome, jogadores[j].pontuacao);
     }
 
-    // Fecha o arquivo
     fclose(arquivo);
 }
 void imprimirpontuacao(){
     char nomeArquivo[] = "pontuacao.txt";
     FILE *arquivo = fopen(nomeArquivo, "r");
-     // Verificar se o arquivo foi aberto com sucesso
     if (arquivo == NULL) {
         fprintf(stderr, "Erro ao abrir o arquivo %s\n", nomeArquivo);
         return; // Código de erro
     }
 
-    // Variável para armazenar cada linha do arquivo
     char linha[100];
 
-    // Ler e imprimir cada linha do arquivo
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         printf("%s", linha);
     }
 
-    // Fechar o arquivo após a leitura
     fclose(arquivo);
 }
 
