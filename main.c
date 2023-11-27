@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX_SALAS 15
+#define MAX_PALAVRAS_ENCONTRADAS 15
 #define RESET      "\033[0m"
 #define BOLD       "\033[1m"
 #define UNDERLINE  "\033[4m"
@@ -28,6 +29,8 @@
 #define BG_BLUE       "\033[44;37m"
 #define BG_MAGENTA    "\033[45;37m"
 #define BG_CYAN       "\033[46;37m"
+char palavrasEncontradas[MAX_PALAVRAS_ENCONTRADAS][20];
+int numPalavrasEncontradas = 0;
 int pontos=0;
 //estrutura da sala
 typedef struct Sala {
@@ -323,8 +326,14 @@ int main() {
                         else{
                             pontos+=1;
                             limpaTela();
+                            strcpy(palavrasEncontradas[numPalavrasEncontradas], sala_atual->palavra);
+                            numPalavrasEncontradas++;
                             printf("Palavra da sala:\n");
                             printf("%s\n",sala_atual->palavra);
+                            printf("Palavras encontradas até agora: ");
+                            for(int i=0;i<numPalavrasEncontradas;i++){
+                                printf(" %s ",palavrasEncontradas[i]);
+                            }
                             printf("Digite ENTER para continuar...");
                             scanf("%*c");
                             getchar();
@@ -344,7 +353,13 @@ int main() {
                         else{
                             pontos+=2;
                             limpaTela();
+                            strcpy(palavrasEncontradas[numPalavrasEncontradas], sala_atual->palavra);
+                            numPalavrasEncontradas++;
                             printf("Palavra da sala:\n");
+                            printf("Palavras encontradas até agora: ");
+                            for(int i=0;i<numPalavrasEncontradas;i++){
+                                printf(" %s ",palavrasEncontradas[i]);
+                            }
                             printf("%s\n",sala_atual->palavra);
                             printf("Digite ENTER para continuar...");
                             scanf("%*c");
@@ -365,8 +380,15 @@ int main() {
                         else{
                             pontos+=3;
                             limpaTela();
+                            strcpy(palavrasEncontradas[numPalavrasEncontradas], sala_atual->palavra);
+                            numPalavrasEncontradas++;
                             printf("Palavra da sala:\n");
                             printf("%s\n",sala_atual->palavra);
+                            printf("Palavras encontradas ate agora: ");
+                            for(int i=0;i<numPalavrasEncontradas;i++){
+                                printf(" %s ",palavrasEncontradas[i]);
+                            }
+                            printf("\n");
                             printf("Digite ENTER para continuar...");
                             scanf("%*c");
                             getchar();
@@ -412,7 +434,12 @@ int main() {
                         {
                             limpaTela();
                             getchar();  
-                            printf("Tente a certa a frase correta:\n");
+                            printf("Palavras encontradas ate agora: ");
+                            for (int i =0;i<numPalavrasEncontradas;i++){
+                                printf(" %s ", palavrasEncontradas[i]);
+                            }
+                            printf("\n");
+                            printf("Tente acertar a frase correta:\n");
                             fgets(frase, sizeof(frase), stdin);
 
                             if (frase[strlen(frase) - 1] == '\n') {
