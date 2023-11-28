@@ -47,7 +47,7 @@ typedef struct Jogador {
     int pontuacao;
 } Jogador;
 
-char nomeDoJogador[50];
+char nomeDoJogador[300];
 int tentativas;
 
 void salvarPontuacao(char *nomeDoJogador, int pontos) {
@@ -105,7 +105,7 @@ void imprimirpontuacao(){
         return; // Código de erro
     }
 
-    char linha[100];
+    char linha[500];
 
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         printf("%s", linha);
@@ -163,7 +163,8 @@ void telaInicial(){
     printf(EGYPT"        L_|__|__|_/         |__|__|_|_)\n"RESET);
     printf(YELLOW"\t\tBOAS VINDAS AO ENIGMA DA ESFINGE!\n"RESET);
     printf(ITALIC UNDERLINE BOLD WHITE"Digite seu nome: "RESET);
-    scanf("%s", nomeDoJogador);
+    fgets(nomeDoJogador,sizeof(nomeDoJogador),stdin);
+    //scanf("%s", nomeDoJogador);
     printf("Escolha a dificuldade:\n");
     printf("1 - Facil.\n");
     printf("2 - Medio.\n");
@@ -330,10 +331,15 @@ int main() {
                             numPalavrasEncontradas++;
                             printf("Palavra da sala:\n");
                             printf("%s\n",sala_atual->palavra);
-                            printf("Palavras encontradas até agora: ");
+                            printf("Palavras encontradas at agora: ");
                             for(int i=0;i<numPalavrasEncontradas;i++){
                                 printf(" %s ",palavrasEncontradas[i]);
                             }
+                            printf("\n");
+                            if(pontos==1){
+                                printf("Voce conseguiu 1 ponto!");
+                            }
+                            printf("Voce pontuou %d pontos\n", pontos);
                             printf("Digite ENTER para continuar...");
                             scanf("%*c");
                             getchar();
@@ -355,7 +361,9 @@ int main() {
                             limpaTela();
                             strcpy(palavrasEncontradas[numPalavrasEncontradas], sala_atual->palavra);
                             numPalavrasEncontradas++;
+                            printf("Voce pontuou %d pontos\n", pontos);
                             printf("Palavra da sala:\n");
+                            printf("%s\n",sala_atual->palavra);
                             printf("Palavras encontradas até agora: ");
                             for(int i=0;i<numPalavrasEncontradas;i++){
                                 printf(" %s ",palavrasEncontradas[i]);
@@ -380,8 +388,10 @@ int main() {
                         else{
                             pontos+=3;
                             limpaTela();
+                            printf("%s",nomeDoJogador);
                             strcpy(palavrasEncontradas[numPalavrasEncontradas], sala_atual->palavra);
                             numPalavrasEncontradas++;
+                            printf("Voce pontuou %d pontos\n", pontos);
                             printf("Palavra da sala:\n");
                             printf("%s\n",sala_atual->palavra);
                             printf("Palavras encontradas ate agora: ");
